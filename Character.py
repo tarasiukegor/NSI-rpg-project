@@ -29,3 +29,4 @@ class character():
         if self.weapon != None:
             print('aaa')
             print("oooo")
+            print("eeeee")
