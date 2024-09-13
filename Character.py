@@ -28,3 +28,4 @@ class character():
         self.attack += sword[weapon]
         if self.weapon != None:
             print('aaa')
+            print("oooo")
