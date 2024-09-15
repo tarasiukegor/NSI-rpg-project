@@ -1,11 +1,4 @@
-sword = {
-    "Common Sword" : 10          # Weapon : Damage dealt
+weapon_list = {
+    "Common Sword" : 10,  
+    "Common Bow" : 5    # Weapon : Damage dealt
 }
-
-bow = {
-    "Common Bow" : 5
-}
-
-
-
-weapons = [sword, bow]
