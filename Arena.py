@@ -7,7 +7,7 @@ import time
 class arena():
     def __init__(self):
         self.monsters_list = [
-            monster("Slime", 25, 5, 3),     # name, health, attack, gold
+            monster("Slime", 10, 5, 3),     # name, health, attack, gold
             monster("King Slime", 50, 15, 5),
             monster("Goblin", 35, 10, 4),
             monster("King Goblin", 70, 25, 10),
@@ -30,8 +30,8 @@ class arena():
         opponent = self.monsters_list[opponent - 1]
         
         while player.hp > 0 and opponent.monster_health > 0:
-            print(f"{player.name} attacks.")
-             
+            print(f"\n{player.name} attacks.\n")
+            time.sleep(2)
             num1 = randint(1,10)
             num2 = randint(1,10)
             operator = random.choice(["*", "+", "-"])
@@ -43,7 +43,7 @@ class arena():
             end_time = time.time()
             
             
-            if end_time - start_time > 10:
+            if end_time - start_time > 5:
                 print("Time's up!")
                 continue
                 
@@ -52,15 +52,16 @@ class arena():
                 if eval(f"{num1}{operator}{num2}") == player_answer:
                     print("Correct")
                     opponent.monster_health -= player.attack
-                    time.sleep(5)
+                    print(f"-{player.attack}hp. {opponent.name} has {opponent.monster_health}hp")
+                    time.sleep(3)
                 else:
-                    print("Incorrect")
-                    time.sleep(5)
+                    print("Incorrect, try next time")
+                    time.sleep(3)
             except ValueError:
                 print("Invalid, please enter an integer")
                 
             if opponent.monster_health > 0:
-                print(f"{opponent.name} attacks.")
+                print(f"\n{opponent.name} attacks.")
                 player.hp -= opponent.attack
                 time.sleep(1)
                 print(f"Player's health: {player.hp}")
@@ -68,7 +69,7 @@ class arena():
         if player.hp <= 0:
             print(f"{player.name} has been defeated, you can no longer play with him")
         else:
-            print(f"You have defeated {opponent.name}, you earn {opponent.gold}")
+            print(f"You have defeated {opponent.name}, you earn {opponent.gold} gold coins")
             player.bank += opponent.gold
             
 # pers =character('Tatata')
