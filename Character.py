@@ -1,5 +1,6 @@
 from Food import *
 from Weapon import *
+from Armor import *
 
 class character():
     def __init__(self, character_name,):
@@ -11,12 +12,12 @@ class character():
         self.bank = 0
         self.opponents_killed = 0
         self.inventory_weapon = []
-        self.inventory_armor = []
+        self.inventory_armor = ["Leather Armor"]
         self.inventory_food= []
         
 
     def infos(self):
-        return(self.weapon_equipped, self.attack, self.inventory_weapon)
+        return(self.weapon_equipped, self.attack, self.inventory_weapon, self.armor_equipped, self.inventory_armor)
         
         
     def attack_deal(self, opponent):
@@ -41,36 +42,32 @@ class character():
         if self.weapon_equipped is None: 
             self.weapon_equipped = weapon
             self.attack += weapon_list[weapon]
-            print(f'u have sucsessfully equiped {weapon}')
+            print(f'You have sucsessfully equiped {weapon}')
             return
         else: 
             current_weapon = self.weapon_equipped
             self.weapon_equipped = weapon
             self.attack -= weapon_list[current_weapon]
             self.attack += weapon_list[weapon]
-            print(f'u have sucsessfully swchtede')
+            print(f'You have sucsessfully swchtede')
             return
                 
                 
     def equip_armor(self, armor): 
         
-        if armor not in weapon_list or weapon not in self.inventory_weapon:
-            raise ValueError("The weapon you are trying to equip does not exist or you don't have it")
+        if armor not in armor_list or armor not in self.inventory_armor:
+            raise ValueError("The armor you are trying to equip does not exist or you don't have it")
             return
             
-        
-        
-        if self.weapon is None: 
-            self.weapon = weapon
-            self.attack += weapon_list[weapon]
-            print(f'u have sucsessfully equiped {weapon}')
+        if self.armor_equipped is None: 
+            self.armor_equipped = armor
+            print(f'You have sucsessfully equiped {armor}')
             return
         else: 
-            current_weapon = self.weapon
-            self.weapon = weapon
-            self.attack -= weapon_list[current_weapon]
-            self.attack += weapon_list[weapon]
-            print(f'u have sucsessfully swchtede')
+            self.armor_equipped = armor
+            print(f'You have sucsessfully switched')
             return
         
                 
+        
+        
