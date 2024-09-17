@@ -72,7 +72,3 @@ class character():
             self.hp = self.max_hp
         print(f"Your hp is now : {self.hp}")
 
-
-# popa = character("yeahor")
-# print(popa.infos())
-# popa.eat_food("Bread")
