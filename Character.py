@@ -6,6 +6,7 @@ class character():
     def __init__(self, character_name,):
         self.name = character_name
         self.hp = 100
+        self.max_hp = 100
         self.weapon_equipped = None
         self.armor_equipped = None
         self.attack = 5
@@ -13,7 +14,7 @@ class character():
         self.opponents_killed = 0
         self.inventory_weapon = []
         self.inventory_armor = ["Leather Armor"]
-        self.inventory_food= []
+        self.inventory_food= ["Bread"]
         
 
     def infos(self):
@@ -70,4 +71,14 @@ class character():
         
                 
         
+    def eat_food(self, food):
+        assert self.hp < 100
+        if food not in food_list or food not in self.inventory_food:
+            raise ValueError("The food you are tryin to eat does not exist or you don't have it")
         
+        self.hp += food_list[food]
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
+        print(f"Your hp is now : {self.hp}")
+
+

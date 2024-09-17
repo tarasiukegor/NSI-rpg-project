@@ -50,7 +50,7 @@ class arena():
             try:
                 player_answer = int(player_answer)
                 if eval(f"{num1}{operator}{num2}") == player_answer:
-                    print("Correct")
+                    print("\nCorrect")
                     opponent.monster_health -= player.attack
                     print(f"-{player.attack}hp. {opponent.name} has {opponent.monster_health}hp")
                     time.sleep(3)
@@ -62,7 +62,13 @@ class arena():
                 
             if opponent.monster_health > 0:
                 print(f"\n{opponent.name} attacks.")
-                player.hp -= opponent.attack
+                if player.armor_equipped == None:
+                    
+                    player.hp -= opponent.attack
+                else:
+                    if opponent.attack - armor_list[player.armor_equipped] < 0 :
+                        print("Your armor is too strong!")
+                        
                 time.sleep(1)
                 print(f"Player's health: {player.hp}")
                 
@@ -82,14 +88,14 @@ class arena():
 
 
 
-popa = character("yeahor")
-popa.equip_armor("Leather Armor")
-print(popa.infos())
+# popa = character("yeahor")
+# popa.equip_armor("Leather Armor")
+# print(popa.infos())
 
-rena = arena()
-rena.display_monsters()  
+# rena = arena()
+# rena.display_monsters()  
 
-rena.fight(popa, 1)
+# rena.fight(popa, 1)
 # Fight system idea: 
     # character VS enemy (loop)
     # character attack : rand(int(1,10)) ("/" or "*" or "-" or "+") rand(int(1,10))
