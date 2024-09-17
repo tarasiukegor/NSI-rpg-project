@@ -13,7 +13,7 @@ class arena():
             monster("King Goblin", 70, 25, 10),
             monster("Orc", 50, 20, 8),
             monster("King Orc", 100, 30, 15),
-            monster("The King of Trolls", 250, 50, 100),
+            monster("The King of Trolls", 5000, 999, 9999),
         ]
         
     def display_monsters(self):
@@ -22,10 +22,8 @@ class arena():
             print(f"{i}. {monster.name} (Health : {monster.monster_health},  Attack : {monster.attack}, Worth of gold : {monster.gold})")
         print("You can now choose a monster to fight by typing: fight( 'character's name' , 'monster's number')")
         
-            
-            
     def fight(self, player, opponent):
-        assert player.hp > 0 
+        assert player.hp > 0 , "u dead, u ain no fightin"
         assert 1 <= opponent <= len(self.monsters_list), "Choose right opponent"
         opponent = self.monsters_list[opponent - 1]
         
@@ -38,16 +36,26 @@ class arena():
             problem = f"{num1}{operator}{num2}=?"
             
             start_time = time.time()
-            print(problem)
+            print(problem, f'\nYou can also type : quit, if you dont want to fight (you will not get any reward)')
             player_answer = input("Enter your answer: ")
             end_time = time.time()
             
-            
-            if end_time - start_time > 5:
+            if end_time - start_time > 5 and player_answer != "quit":
                 print("Time's up!")
-                continue
+                if opponent.monster_health > 0:
+                    print(f"\n{opponent.name} attacks.")
+                    if player.armor_equipped == None:
+                        player.hp -= opponent.attack
+                    else:
+                        if opponent.attack - armor_list[player.armor_equipped] <= 0 :
+                            print("Your armor is too strong!")
+                        
+                    time.sleep(1)
+                    print(f"Player's health: {player.hp}")
                 
             try:
+                if player_answer == "quit":
+                    break
                 player_answer = int(player_answer)
                 if eval(f"{num1}{operator}{num2}") == player_answer:
                     print("\nCorrect")
@@ -66,7 +74,7 @@ class arena():
                     
                     player.hp -= opponent.attack
                 else:
-                    if opponent.attack - armor_list[player.armor_equipped] < 0 :
+                    if opponent.attack - armor_list[player.armor_equipped] <= 0 :
                         print("Your armor is too strong!")
                         
                 time.sleep(1)
@@ -74,34 +82,22 @@ class arena():
                 
         if player.hp <= 0:
             print(f"{player.name} has been defeated, you can no longer play with him")
+        elif player_answer == "quit":
+            print('you chose to leave')
         else:
             print(f"You have defeated {opponent.name}, you earn {opponent.gold} gold coins")
+            player.opponents_killed += 1
             player.bank += opponent.gold
             
-# pers =character('Tatata')
 
-# rena = arena()
-
-
-                      
-# rena.fight(pers, 1) 
-
-
-
-# popa = character("yeahor")
-# popa.equip_armor("Leather Armor")
-# print(popa.infos())
-
-# rena = arena()
-# rena.display_monsters()  
-
-# rena.fight(popa, 1)
-# Fight system idea: 
+# Fight system: 
     # character VS enemy (loop)
-    # character attack : rand(int(1,10)) ("/" or "*" or "-" or "+") rand(int(1,10))
+    # character attack : rand(int(1,10)) ("*" or "-" or "+") rand(int(1,10))
     # if answer is correct, character attacks enemy, then enemy strikes
     # enemy attack: basic enemy attack
     # figth untill either enemy's health <= 0 or character's health <= 0 
     # if enemy dies, character recieves gold from the enemy, and moves on
     # if character dies, you cannot use this character 
     
+            
+            
