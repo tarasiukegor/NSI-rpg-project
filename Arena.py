@@ -65,6 +65,7 @@ class arena():
                 else:
                     print("Incorrect, try next time")
                     time.sleep(3)
+                    pass
             except ValueError:
                 print("Invalid, please enter an integer")
                 
